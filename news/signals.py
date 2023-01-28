@@ -2,7 +2,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from news.models import News, RegionStatus
 from prodiction import predict_news
-from nemo.collections import nlp as nemo_nlp
+# from nemo.collections import nlp as nemo_nlp
 
 
 #
