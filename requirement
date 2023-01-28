@@ -1,0 +1,5 @@
+django
+djangorestframework
+pandas
+Cython
+python -m pip install git+https://github.com/NVIDIA/NeMo.git@"r1.14.0"#egg=nemo_toolkit[nlp]

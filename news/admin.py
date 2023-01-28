@@ -4,7 +4,7 @@ from news.models import News
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
-    exclude = ['label', 'published', "region"]
+    exclude = ['label', 'published', "region",'title']
     list_display = ['title', 'content', 'label', 'published', "region"]
     # exclude_list = ['label', 'published']
 

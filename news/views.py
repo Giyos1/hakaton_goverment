@@ -1,10 +1,11 @@
 from datetime import timedelta, datetime
 from rest_framework.response import Response
+from rest_framework.utils import json
 from rest_framework.views import APIView
 from threading import Thread
 from news.models import News, RegionStatus
 from news.utils import creat_news
-from news.serializers import  RegionSerializers
+from news.serializers import RegionSerializers
 
 
 class OqitishAPIView(APIView):
@@ -26,8 +27,8 @@ class StatusAPIView(APIView):
         news = News.objects.filter(published__range=(start_time, datetime.now())).order_by('-published')
         for i in ['olmazor', "mirobod", "sergeli", "yakkasaroy", "mirzo ulugʻbek", "yashnobod", "bektemir",
                   "shayxontohur", "chilonzor", "yangihayot", "uchtepa", "yunusobod"]:
-            json = creat_json(i, news=news)
-            list2.append(json)
+            custom_json = creat_json(i, news=news)
+            list2.append(custom_json)
 
         return Response(data=list2, status=200)
 
@@ -36,7 +37,13 @@ def creat_json(text: str, news):
     yomon = news.filter(region=text).filter(label=0).count()
     yaxshi = news.filter(region=text).filter(label=1).count()
     ikkalasiyam = news.filter(region=text).filter(label=3).count()
-    return {"region": text,
+    x = RegionStatus.objects.filter(region=text).first().x
+    y = RegionStatus.objects.filter(region=text).first().y
+    id = RegionStatus.objects.filter(region=text).first().id
+    return {"id": id,
+            "region": text,
+            "x": x,
+            "y": y,
             "yomon": yomon,
             "yaxshi": yaxshi,
             "ikkalasiyam": ikkalasiyam}
