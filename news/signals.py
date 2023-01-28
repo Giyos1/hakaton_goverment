@@ -2,13 +2,11 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from news.models import News, RegionStatus
 from prodiction import predict_news
-# from nemo.collections import nlp as nemo_nlp
+from nemo.collections import nlp as nemo_nlp
 
-
-#
-# checkpoint_path = '2023-01-26_17-30-52/checkpoints/TextClassification--val_loss=1.2423-epoch=4.ckpt'
-# infer_model = nemo_nlp.models.TextClassificationModel.load_from_checkpoint(checkpoint_path=checkpoint_path)
-# infer_model.to("cpu")
+checkpoint_path = '2023-01-26_17-30-52/checkpoints/TextClassification--val_loss=1.2423-epoch=4.ckpt'
+infer_model = nemo_nlp.models.TextClassificationModel.load_from_checkpoint(checkpoint_path=checkpoint_path)
+infer_model.to("cpu")
 
 
 @receiver(post_save, sender=News)
@@ -16,8 +14,7 @@ def creat_news(sender, instance, created, **kwargs):
     if created:
         if not instance.region and not instance.label:
             print(instance.content)
-            ans = (0, [''])
-            # ans = predict_news(instance.content, infer_model)
+            ans = predict_news(instance.content, infer_model)
             if ans == 0:
                 instance.delete()
             else:
