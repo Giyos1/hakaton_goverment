@@ -1,10 +1,10 @@
 from django.contrib import admin
-from news.models import News
+from news.models import News, RegionStatus
 
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
-    exclude = ['label', 'published', "region",'title']
+    exclude = ['label', 'published', "region", 'title']
     list_display = ['title', 'content', 'label', 'published', "region"]
     # exclude_list = ['label', 'published']
 
@@ -13,3 +13,8 @@ class NewsAdmin(admin.ModelAdmin):
     #         return self.exclude_list
     #     # return []
     #     super().get_exclude(request, obj)
+
+
+@admin.register(RegionStatus)
+class NewsAdmin(admin.ModelAdmin):
+    list_display = ('name', "yomon", "yaxshi", "ikkalasiyam")
