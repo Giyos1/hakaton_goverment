@@ -14,6 +14,7 @@ def creat_news(sender, instance, created, **kwargs):
     if created:
         if not instance.region and not instance.label:
             print(instance.content)
+            # ans = (0,[' '])
             ans = predict_news(instance.content, infer_model)
             if ans == 0:
                 instance.delete()
@@ -23,7 +24,7 @@ def creat_news(sender, instance, created, **kwargs):
                         content=instance.content,
                         region=i,
                         label=ans[0])
-                    r = RegionStatus.objects.filter(region=i).first()
+                    r = RegionStatus.objects.filter(name=i).first()
                     if ans[0] == 0:
                         r.yomon += 1
                     elif ans[0] == 1:

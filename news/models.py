@@ -16,9 +16,9 @@ class News(models.Model):
 
 
 class RegionStatus(models.Model):
-    x = models.IntegerField(default=0)
+    name = models.CharField(max_length=100)
     y = models.IntegerField(default=0)
-    region = models.CharField(max_length=100)
+    x = models.IntegerField(default=0)
     yomon = models.IntegerField()
     yaxshi = models.IntegerField()
     ikkalasiyam = models.IntegerField()

@@ -37,13 +37,13 @@ def creat_json(text: str, news):
     yomon = news.filter(region=text).filter(label=0).count()
     yaxshi = news.filter(region=text).filter(label=1).count()
     ikkalasiyam = news.filter(region=text).filter(label=3).count()
-    x = RegionStatus.objects.filter(region=text).first().x
-    y = RegionStatus.objects.filter(region=text).first().y
-    id = RegionStatus.objects.filter(region=text).first().id
+    x = RegionStatus.objects.filter(name=text).first().x
+    y = RegionStatus.objects.filter(name=text).first().y
+    id = RegionStatus.objects.filter(name=text).first().id
     return {"id": id,
-            "region": text,
-            "x": x,
+            "name": text,
             "y": y,
+            "x": x,
             "yomon": yomon,
             "yaxshi": yaxshi,
             "ikkalasiyam": ikkalasiyam}

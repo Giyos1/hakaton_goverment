@@ -177,18 +177,3 @@ def predict_news(news, infer_model):
     return result[0], tumanlar
 
 
-if __name__ == '__main__':
-    from nemo.collections import nlp as nemo_nlp
-
-    checkpoint_path = '2023-01-26_17-30-52/checkpoints/TextClassification--val_loss=1.2423-epoch=4.ckpt'
-    infer_model = nemo_nlp.models.TextClassificationModel.load_from_checkpoint(checkpoint_path=checkpoint_path)
-    infer_model.to("cpu")
-    predict_news(
-        '“Bugun, 28 yanvar kuni soat 10:50 da Yakkasaroy tumani '
-        '“Qushbegi” MFY Sho‘ta Rustaveli ko‘chasida harakatlanib ketayotgan'
-        ' Mersedes-Benz rusumli yo‘lovchi tashishga mo‘ljallangan avtobusda yong‘in'
-        ' sodir bo‘lganligi to‘g‘risida shahar FVBga xabar kelib tushgan. Haydovchining'
-        ' birlamchi ma’lumotidan avtobusning motor qismida nosozliklar yuzaga kelganligi uchun, '
-        'yo‘lovchilarni tushirib avtosaroyga qaytayotgan vaqtda dvigatelda yong‘in kelib chiqqan. '
-        'Shunga ko‘ra, 1 ta yong‘in-qutqaruv ekipaji soat 10:54 da voqea joyiga yetib borib, '
-        'yong‘in soat 10:58 da bartaraf etilgan”, deyiladi xabarda.', infer_model)
