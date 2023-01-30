@@ -175,5 +175,3 @@ def predict_news(news, infer_model):
     else:
         return 0
     return result[0], tumanlar
-
-
